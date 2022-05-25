@@ -2,17 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimationStates : MonoBehaviour
+public static class AnimationStates
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public static readonly int Horizontal = Animator.StringToHash("Horizontal");
+    public static readonly int Vertical = Animator.StringToHash("Vertical");
+    public static readonly int Idle = Animator.StringToHash("Idle");
+    public static readonly int Run = Animator.StringToHash("Run");
+    public static readonly int Attack = Animator.StringToHash("Attack");
 }

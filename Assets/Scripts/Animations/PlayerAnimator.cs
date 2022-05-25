@@ -2,17 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class PlayerAnimator : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Animator _animator;
+
+    private int _currentState;
+
+    private void Awake()
     {
-        
+        Initialize();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Initialize()
     {
-        
+        _animator = GetComponent<Animator>();
+        _currentState = AnimationStates.Idle;
+    }
+
+    private void SetBoolState(int nextState)
+    {
+        _animator.SetBool(_currentState, false);
+        _currentState = nextState;
+        _animator.SetBool(_currentState, true);
+    }
+
+    public void SetIdle()
+    {
+        SetBoolState(AnimationStates.Idle);
+    }
+
+    public void SetVelocity(Vector3 velocity)
+    {
+        _animator.SetFloat(AnimationStates.Horizontal, velocity.x);
+        _animator.SetFloat(AnimationStates.Vertical, velocity.z);
     }
 }
