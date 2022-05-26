@@ -23,11 +23,7 @@ public class PlayerWeaponController : MonoBehaviour
 
     private void Shoot()
     {
-        Ray ray = new Ray(transform.position, transform.forward);
-        RaycastHit hit;
-        Physics.Raycast(ray, out hit);
-        Debug.DrawLine(transform.position - Vector3.up, transform.position + transform.forward * 100);
-        _currentWeapon.Shoot(hit.point);
+        _currentWeapon.Shoot(transform.forward);
     }
 
     private void SwitchWeapon(Weapon nextWeapon)

@@ -9,9 +9,12 @@ public abstract class Weapon : MonoBehaviour
 
     protected Camera _camera;
 
+    protected int _currentAmmo;
+    protected float _nextShotTime;
+
     protected virtual void Awake()
     {
-
+        _currentAmmo = _weaponData.MaxAmmo;
     }
 
     public abstract void Shoot(Vector3 point);

@@ -6,12 +6,16 @@ using UnityEngine;
 public class WeaponData : ScriptableObject
 {
     [SerializeField] private float _damage;
-    [SerializeField] private float _maxAmmo;
-    [SerializeField] private float _shootDelay;
+    [SerializeField] private float _fireRate;
     [SerializeField] private float _reloadTime;
+    [SerializeField] private float _bulletSpeed;
+    [SerializeField] private int _maxAmmo;
+    [SerializeField] private Bullet _bullet;
 
     public float Damage { get => _damage; }
-    public float MaxAmmo { get => _maxAmmo; }
-    public float ShootDelay { get => _shootDelay; }
+    public float FireRate { get => _fireRate; }
     public float ReloadSpeed { get => _reloadTime; }
+    public float BulletSpeed { get => _bulletSpeed; }
+    public int MaxAmmo { get => _maxAmmo; }
+    public Bullet Bullet { get => _bullet; }
 }

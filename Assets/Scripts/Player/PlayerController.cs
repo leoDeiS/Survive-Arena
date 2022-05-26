@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UUtils;
 
-[RequireComponent(typeof(MovementController), typeof(PlayerWeaponController))]
+[RequireComponent(typeof(MovementController), typeof(PlayerWeaponController), typeof(PlayerHealth))]
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private LayerMask _mouseCollisionLayer;
@@ -12,12 +12,14 @@ public class PlayerController : MonoBehaviour
 
     private PlayerAnimator _animator;
     private MovementController _movement;
+    private PlayerHealth _health;
 
     private void Awake()
     {
         _camera = Camera.main;
         _animator = GetComponentInChildren<PlayerAnimator>();
         _movement = GetComponent<MovementController>();
+        InitializeHealth();
     }
 
     private void Update()
@@ -38,6 +40,12 @@ public class PlayerController : MonoBehaviour
         _animator.SetVelocity(GetVelocity(_movement.Velocity));
     }
 
+    private void InitializeHealth()
+    {
+        _health = GetComponent<PlayerHealth>();
+        _health.OnDeath += Die;
+    }
+
     private Vector3 GetVelocity(Vector3 direction)
     {
         return Quaternion.Inverse( Quaternion.LookRotation(transform.forward)) * direction;
@@ -47,5 +55,10 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 mousePoint = CameraUtils.GetMouseHitPosition(_camera, _mouseCollisionLayer);
         return (mousePoint - transform.position).WithY(0);
+    }
+
+    private void Die()
+    {
+
     }
 }
