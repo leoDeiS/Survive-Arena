@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ public class PlayerWeaponController : MonoBehaviour
 {
     [SerializeField] private Transform _weaponHolder;
     [SerializeField] private Weapon _currentWeapon;
+
+    public event Action<Weapon> OnWeaponSwitched;
 
     private void Update()
     {
@@ -31,5 +34,6 @@ public class PlayerWeaponController : MonoBehaviour
         _currentWeapon.gameObject.SetActive(false);
         _currentWeapon = nextWeapon;
         _currentWeapon.gameObject.SetActive(true);
+        OnWeaponSwitched?.Invoke(nextWeapon);
     }
 }

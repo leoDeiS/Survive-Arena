@@ -8,7 +8,7 @@ public class Rifle : Weapon
 
     public override void Reload()
     {
-        
+        StartCoroutine(Reloading());
     }
 
     public override void Shoot(Vector3 direction)
