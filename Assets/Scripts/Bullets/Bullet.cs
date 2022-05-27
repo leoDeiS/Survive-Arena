@@ -27,8 +27,9 @@ public abstract class Bullet : MonoBehaviour
         if(collision.transform.TryGetComponent(out health))
         {
             health.TakeDamage(_damage);
-            Destroy();
         }
+
+        Destroy();
     }
 
     protected virtual void Destroy()

@@ -42,7 +42,7 @@ public class MovementController : MonoBehaviour
     public void Move(Vector3 direction)
     {
         _moveDirection = _camera.transform.TransformDirection(direction);
-        Vector3 moveVector = _moveDirection * _moveSpeed;
+        Vector3 moveVector = _moveDirection.normalized * _moveSpeed;
         moveVector = HandleGravity(moveVector);
         _cController.Move(moveVector * Time.deltaTime);
     }

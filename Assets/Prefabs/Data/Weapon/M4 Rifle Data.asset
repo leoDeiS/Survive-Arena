@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: M4 Rifle Data
   m_EditorClassIdentifier: 
   _damage: 10
-  _maxAmmo: 30
-  _fireRate: 10
-  _reloadTime: 1
+  _fireRate: 9
+  _reloadTime: 2
   _bulletSpeed: 1200
+  _maxAmmo: 30
   _bullet: {fileID: 4913947263989139234, guid: 45d33e7dd55384249ac2abfe7d8d6cb8, type: 3}

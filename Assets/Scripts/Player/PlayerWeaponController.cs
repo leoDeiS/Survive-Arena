@@ -11,6 +11,12 @@ public class PlayerWeaponController : MonoBehaviour
 
     public event Action<Weapon> OnWeaponSwitched;
 
+    private void Start()
+    {
+        OnWeaponSwitched?.Invoke(_currentWeapon);
+        _currentWeapon.Equip();
+    }
+
     private void Update()
     {
         if(Input.GetMouseButton(0))

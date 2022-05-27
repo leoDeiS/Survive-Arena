@@ -10,7 +10,6 @@ public abstract class Weapon : MonoBehaviour
 
     protected Camera _camera;
 
-    protected float _reloadTime;
     protected float _nextShotTime;
 
     protected bool _reloading;
@@ -28,13 +27,10 @@ public abstract class Weapon : MonoBehaviour
 
     protected IEnumerator Reloading()
     {
-        if (_reloading) yield break;
+        if (_reloading || _currentAmmo == _weaponData.MaxAmmo) yield break;
 
         OnReloadingStarted?.Invoke();
-        while(Time.time <= _reloadTime)
-        {
-            _reloadTime = Time.time + 1f / _weaponData.FireRate;
-        }
+        yield return new WaitForSeconds(_weaponData.ReloadSpeed);
         SetAmmo(_weaponData.MaxAmmo);
         OnReloadingComplete?.Invoke();
     }
@@ -51,6 +47,7 @@ public abstract class Weapon : MonoBehaviour
 
     public virtual void Equip()
     {
+        SetAmmo(_weaponData.MaxAmmo);
         gameObject.SetActive(true);
     }
 
