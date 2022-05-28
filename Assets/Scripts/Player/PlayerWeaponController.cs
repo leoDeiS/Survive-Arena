@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UUtils;
 
 public class PlayerWeaponController : MonoBehaviour
@@ -9,7 +10,7 @@ public class PlayerWeaponController : MonoBehaviour
     [SerializeField] private Transform _weaponHolder;
     [SerializeField] private Weapon _currentWeapon;
 
-    public event Action<Weapon> OnWeaponSwitched;
+    public UnityEvent<Weapon> OnWeaponSwitched;
 
     private void Start()
     {
@@ -17,22 +18,14 @@ public class PlayerWeaponController : MonoBehaviour
         _currentWeapon.Equip();
     }
 
-    private void Update()
+    public void Shoot(Vector3 dir)
     {
-        if(Input.GetMouseButton(0))
-        {
-            Shoot();
-        }
-
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            _currentWeapon.Reload();
-        }
+        _currentWeapon.Shoot(dir);
     }
 
-    private void Shoot()
+    public void Reload()
     {
-        _currentWeapon.Shoot(transform.forward);
+        _currentWeapon.Reload();
     }
 
     private void SwitchWeapon(Weapon nextWeapon)

@@ -6,7 +6,9 @@ public static class AnimationStates
 {
     public static readonly int Horizontal = Animator.StringToHash("Horizontal");
     public static readonly int Vertical = Animator.StringToHash("Vertical");
+    public static readonly int Velocity = Animator.StringToHash("Velocity");
     public static readonly int Idle = Animator.StringToHash("Idle");
     public static readonly int Run = Animator.StringToHash("Run");
+    public static readonly int Walk = Animator.StringToHash("Walk");
     public static readonly int Attack = Animator.StringToHash("Attack");
 }

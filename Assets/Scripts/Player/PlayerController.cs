@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
     private PlayerAnimator _animator;
     private MovementController _movement;
+    private PlayerWeaponController _weaponController;
     private PlayerHealth _health;
 
     private void Awake()
@@ -19,31 +20,47 @@ public class PlayerController : MonoBehaviour
         _camera = Camera.main;
         _animator = GetComponentInChildren<PlayerAnimator>();
         _movement = GetComponent<MovementController>();
+        _weaponController = GetComponent<PlayerWeaponController>();
         InitializeHealth();
     }
 
     private void Update()
     {
-        float xMove = Input.GetAxis("Horizontal");
-        float yMove = Input.GetAxis("Vertical");
+        float xMove = Input.GetAxisRaw("Horizontal");
+        float yMove = Input.GetAxisRaw("Vertical");
 
-        Vector3 moveVector = new Vector3(xMove, 0, yMove);
+        Vector3 moveVector = new Vector3(xMove, 0, yMove).normalized;
 
-        Vector3 mouseDirection = GetMouseDirection();
-        if(mouseDirection != Vector3.zero)
+        MoveAndRotate(moveVector);
+
+        if (Input.GetMouseButton(0))
         {
-            _movement.RotateDirection(GetMouseDirection());
+            _weaponController.Shoot(GetMouseDirection().normalized);
         }
 
-        _movement.Move(moveVector);
-
-        _animator.SetVelocity(GetVelocity(_movement.Velocity));
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            _weaponController.Reload();
+        }
     }
 
     private void InitializeHealth()
     {
         _health = GetComponent<PlayerHealth>();
         _health.OnDeath += Die;
+    }
+
+    private void MoveAndRotate(Vector3 moveVector)
+    {
+        Vector3 mouseDirection = GetMouseDirection();
+        if (mouseDirection != Vector3.zero)
+        {
+            _movement.RotateDirection(GetMouseDirection().WithY(0));
+        }
+
+        _movement.Move(moveVector);
+
+        _animator.SetVelocity(GetVelocity(_movement.Velocity));
     }
 
     private Vector3 GetVelocity(Vector3 direction)
@@ -54,7 +71,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 GetMouseDirection()
     {
         Vector3 mousePoint = CameraUtils.GetMouseHitPosition(_camera, _mouseCollisionLayer);
-        return (mousePoint - transform.position).WithY(0);
+        return mousePoint - transform.position;
     }
 
     private void Die()

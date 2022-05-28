@@ -15,9 +15,10 @@ public class WeaponUI : BaseUIBehaviour
     private string _ammoTextFormat = "{0}/{1}";
 
 
-    private void Awake()
+    protected override void Awake()
     {
-        _weaponController.OnWeaponSwitched += OnWeaponSwitched;
+        base.Awake();
+        _weaponController.OnWeaponSwitched.AddListener(OnWeaponSwitched);
     }
 
     private void OnWeaponSwitched(Weapon weapon)

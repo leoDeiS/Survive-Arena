@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public abstract class Bullet : MonoBehaviour
+public abstract class Bullet : MonoBehaviour, IBullet
 {
     protected float _speed;
     protected float _damage;
 
     protected Rigidbody _rigidbody;
     protected Vector3 _direction;
+
+    public Vector3 MoveDirection => _direction;
 
     protected virtual void Awake()
     {
@@ -19,6 +21,7 @@ public abstract class Bullet : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         _rigidbody.velocity = _direction * _speed * Time.deltaTime;
+        _rigidbody.rotation = Quaternion.LookRotation(_direction);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -26,7 +29,7 @@ public abstract class Bullet : MonoBehaviour
         IHealth health;
         if(collision.transform.TryGetComponent(out health))
         {
-            health.TakeDamage(_damage);
+            health.TakeDamage(_damage, _direction);
         }
 
         Destroy();

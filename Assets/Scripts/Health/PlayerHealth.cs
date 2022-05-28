@@ -19,6 +19,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
 
     public void AddHealth(float amount)
     {
+        _currentHealth += amount;
         OnHealthChanged?.Invoke(_maxHealth, _currentHealth);
     }
 
@@ -30,6 +31,11 @@ public class PlayerHealth : MonoBehaviour, IHealth
             _currentHealth = 0;
             OnDeath?.Invoke();
         }
-        OnHealthChanged?.Invoke(_maxHealth, _currentHealth);
+        OnHealthChanged?.Invoke(_currentHealth, _maxHealth);
+    }
+
+    public void TakeDamage(float damage, Vector3 direction)
+    {
+        TakeDamage(damage);
     }
 }

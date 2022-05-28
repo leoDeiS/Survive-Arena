@@ -77,6 +77,12 @@ namespace UUtils
             return array[i];
         }
 
+        public static T RandomElement<T>(IEnumerable<T> collection, int minIndex = 0)
+        {
+            int i = Random(minIndex, collection.Count());
+            return collection.ElementAt(i);
+        }
+
         public static float Percent(float value, float percent)
         {
             return (value * percent) / 100;
