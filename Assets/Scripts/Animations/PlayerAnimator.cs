@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator), typeof(PlayerIKManager))]
+[RequireComponent(typeof(Animator), typeof(PlayerIKManager), typeof(RagdollController))]
 public class PlayerAnimator : MonoBehaviour
 {
     [SerializeField] private float _smoothing;
@@ -24,6 +24,7 @@ public class PlayerAnimator : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _ikManager = GetComponent<PlayerIKManager>();
+        _ragdoll = GetComponent<RagdollController>();
         _currentState = AnimationStates.Idle;
     }
 
@@ -50,6 +51,11 @@ public class PlayerAnimator : MonoBehaviour
         _velocity = SmoothVelocity(velocity);
         _animator.SetFloat(AnimationStates.Horizontal, _velocity.x);
         _animator.SetFloat(AnimationStates.Vertical, _velocity.z);
+    }
+
+    public void SetReloading(float duration)
+    {
+        _ikManager.ReloadIK(duration);
     }
 
     public void SetDeath()

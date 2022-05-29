@@ -76,6 +76,8 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
-
+        _animator.SetDeath();
+        _weaponController.enabled = false;
+        enabled = false;
     }
 }

@@ -7,6 +7,8 @@ public abstract class Weapon : MonoBehaviour
 {
     [SerializeField] protected WeaponData _weaponData;
     [SerializeField] protected Transform _shootPoint;
+    [SerializeField] private Transform _rightHandGrip;
+    [SerializeField] private Transform _leftHandGrip;
 
     protected Camera _camera;
 
@@ -15,6 +17,9 @@ public abstract class Weapon : MonoBehaviour
     protected bool _reloading;
 
     protected int _currentAmmo { get; private set; }
+    public Transform RightHandGrip { get => _rightHandGrip; }
+    public Transform LeftHandGrip { get => _leftHandGrip; }
+    public WeaponData WeaponData { get => _weaponData; }
 
     public UnityEvent OnReloadingStarted;
     public UnityEvent OnReloadingComplete;
