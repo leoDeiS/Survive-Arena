@@ -9,6 +9,7 @@ public class PlayerAnimator : MonoBehaviour
 
     private Animator _animator;
     private PlayerIKManager _ikManager;
+    private RagdollController _ragdoll;
 
     private int _currentState;
 
@@ -49,6 +50,12 @@ public class PlayerAnimator : MonoBehaviour
         _velocity = SmoothVelocity(velocity);
         _animator.SetFloat(AnimationStates.Horizontal, _velocity.x);
         _animator.SetFloat(AnimationStates.Vertical, _velocity.z);
+    }
+
+    public void SetDeath()
+    {
+        _animator.enabled = false;
+        _ragdoll.Activate();
     }
 
 }

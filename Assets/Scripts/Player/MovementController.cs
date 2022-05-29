@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UUtils;
 
 [RequireComponent(typeof(CharacterController))]
 public class MovementController : MonoBehaviour
@@ -39,10 +40,23 @@ public class MovementController : MonoBehaviour
         return moveVector;
     }
 
+    private Vector3 AdjustToCamera(Vector3 direction)
+    {
+        Vector3 forward = _camera.transform.forward;
+        Vector3 right = _camera.transform.right;
+
+        forward.y = 0f;
+        right.y = 0f;
+        forward.Normalize();
+        right.Normalize();
+
+        return forward * direction.z + right * direction.x;
+    }
+
     public void Move(Vector3 direction)
     {
-        _moveDirection = _camera.transform.TransformDirection(direction);
-        Vector3 moveVector = _moveDirection.normalized * _moveSpeed;
+        _moveDirection = AdjustToCamera(direction);
+        Vector3 moveVector = _moveDirection * _moveSpeed;
         moveVector = HandleGravity(moveVector);
         _cController.Move(moveVector * Time.deltaTime);
     }
