@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UUtils;
 
-[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(NavMeshAgent), typeof(EnemyVisual), typeof(EnemyHealth))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private EnemyData _data;
@@ -12,6 +13,7 @@ public class Enemy : MonoBehaviour
     private EnemyAnimator _animator;
     private EnemyHealth _health;
     private NavMeshAgent _agent;
+    private EnemyVisual _visual;
 
     private EnemyStatesFactory _statesFactory;
     private EnemyBaseState _currentState;
@@ -23,10 +25,13 @@ public class Enemy : MonoBehaviour
     public NavMeshAgent Agent { get => _agent; }
     public EnemyData Data { get => _data; }
 
+    public event Action<Enemy> OnDeath;
+
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponentInChildren<EnemyAnimator>();
+        _visual = GetComponent<EnemyVisual>();
         InitializeHealth();
         InitializeStateMachne();
     }
@@ -46,6 +51,7 @@ public class Enemy : MonoBehaviour
     {
         _health = GetComponent<EnemyHealth>();
         _health.Initialize(_data.Heath);
+        _health.OnDamage += _visual.CreateBloodEffect;
         _health.OnDeath += Die;
     }
 
@@ -88,5 +94,6 @@ public class Enemy : MonoBehaviour
         _agent.enabled = false;
         _animator.SetDeath();
         _animator.DeathBounce(_health.LastHitDirection);
+        OnDeath?.Invoke(this);
     }
 }

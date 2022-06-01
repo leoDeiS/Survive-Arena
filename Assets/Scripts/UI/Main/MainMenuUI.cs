@@ -10,13 +10,14 @@ public class MainMenuUI : BaseUIBehaviour
 
     private void Start()
     {
+        Cursor.visible = true;
         _startButton.onClick.AddListener(StartGame);
         _exitButton.onClick.AddListener(Exit);
     }
 
     private void StartGame()
     {
-
+        GameController.Instance.LoadBattleScene();
     }
 
     private void Exit()

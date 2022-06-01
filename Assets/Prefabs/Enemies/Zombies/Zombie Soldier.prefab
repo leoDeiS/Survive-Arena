@@ -390,6 +390,7 @@ GameObject:
   - component: {fileID: 2716628749768253237}
   - component: {fileID: 2716628749768253240}
   - component: {fileID: 2716628749768253242}
+  - component: {fileID: 5405875773223812689}
   m_Layer: 0
   m_Name: Zombie Soldier
   m_TagString: Untagged
@@ -460,7 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf1634a6d144a5d408432845abbce670, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _data: {fileID: 11400000, guid: a097e1ffbec87b54287fcb7f28628634, type: 2}
+  _data: {fileID: 11400000, guid: ffac71446a5cfa84f8d2795c5e309a43, type: 2}
 --- !u!114 &2716628749768253242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,6 +475,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _collider: {fileID: 2716628749768253237}
+--- !u!114 &5405875773223812689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2716628749768253246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45860e537ee1dd40b2017694eedb223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bloodEffect: {fileID: 163734, guid: 0a5ac034133a7654a8565697adff5548, type: 3}
 --- !u!54 &2419973198452099140
 Rigidbody:
   m_ObjectHideFlags: 0

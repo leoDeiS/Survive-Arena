@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _camera = Camera.main;
+        Cursor.visible = false;
         _animator = GetComponentInChildren<PlayerAnimator>();
         _movement = GetComponent<MovementController>();
         _weaponController = GetComponent<PlayerWeaponController>();
@@ -79,5 +80,6 @@ public class PlayerController : MonoBehaviour
         _animator.SetDeath();
         _weaponController.enabled = false;
         enabled = false;
+        GameController.Instance.EndLevel(false);
     }
 }

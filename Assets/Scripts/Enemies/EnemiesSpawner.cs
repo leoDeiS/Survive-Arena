@@ -82,4 +82,10 @@ public class EnemiesSpawner : MonoBehaviour
     {
         StopCoroutine(_spawningCoroutine);
     }
+
+    public void UpdateDelay()
+    {
+        float delayMultiplier = MathUtils.Percent(_spawnDelay, 10);
+        _spawnDelay += delayMultiplier;
+    }
 }

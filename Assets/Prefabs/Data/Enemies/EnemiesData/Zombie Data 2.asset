@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd7248be6b54a1444969895c87b6c526, type: 3}
-  m_Name: EnemyData
+  m_Name: Zombie Data 2
   m_EditorClassIdentifier: 
-  _speed: 2
-  _heath: 100
+  _speed: 3
+  _heath: 120
   _attackDistance: 1.5
-  _damage: 5
+  _damage: 20
   _attackDelay: 1
