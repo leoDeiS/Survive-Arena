@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using UUtils;
 using NaughtyAttributes;
 
@@ -24,9 +23,9 @@ public class ObjectsSpawner : MonoBehaviour
         {
             Vector3 point = GeneratePoint();
             _positions.Add(point);
-            GameObject obj = PrefabUtility.InstantiatePrefab(_prefab, transform) as GameObject;
-            obj.transform.position = point.WithY(transform.position.y);
-            obj.transform.rotation = Quaternion.identity;
+            //GameObject obj = PrefabUtility.InstantiatePrefab(_prefab, transform) as GameObject;
+            //obj.transform.position = point.WithY(transform.position.y);
+            //obj.transform.rotation = Quaternion.identity;
         }
     }
 

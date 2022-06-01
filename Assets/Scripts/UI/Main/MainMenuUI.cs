@@ -20,6 +20,11 @@ public class MainMenuUI : BaseUIBehaviour
         GameController.Instance.LoadBattleScene();
     }
 
+    private void Update()
+    {
+        Cursor.visible = true;
+    }
+
     private void Exit()
     {
         Application.Quit();
